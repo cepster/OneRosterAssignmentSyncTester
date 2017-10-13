@@ -128,7 +128,7 @@
 
             startSpinner();
 
-            $.ajax('http://localhost:3001/createAssignment', {
+            $.ajax('createAssignment', {
                 data: JSON.stringify({
                     url: $('#url').val(),
                     key: $("#key").val(),
@@ -147,7 +147,7 @@
 
             startSpinner();
 
-            $.ajax('http://localhost:3001/createScore', {
+            $.ajax('createScore', {
                 data: JSON.stringify({
                     url: $('#url').val(),
                     key: $("#key").val(),
@@ -162,7 +162,7 @@
         $("#testConnectionBtn").click(function() {
             startSpinner();
 
-            var url = 'http://localhost:3001/getOrgs?';
+            var url = 'getOrgs?';
             url += 'url='+ $('#url').val();
             url += '&key=' + $('#key').val();
             url += '&secret=' + $("#secret").val();
