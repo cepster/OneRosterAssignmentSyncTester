@@ -7,6 +7,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const app = express();
 
+app.set('port', (process.env.PORT || 3001));
 app.use(bodyParser.json());
 
 app.post('/createAssignment', (req, res) => {
@@ -89,6 +90,6 @@ app.get('/getOrgs', (req, res) => {
 
 app.use('/', express.static('public'));
 
-app.listen(3001, () => {
-  console.log('App is listening on port 3001');
+app.listen(app.get('port'), function() {
+console.log('Node app is running on port', app.get('port'));
 });
