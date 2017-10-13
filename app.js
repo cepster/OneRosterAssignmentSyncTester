@@ -66,7 +66,6 @@ app.post('/createScore', (req, res) => {
 });
 
 app.get('/getOrgs', (req, res) => {
-    console.log(req);
     let request_data = {
         url: req.query.url + '/orgs',
         method: 'GET'
