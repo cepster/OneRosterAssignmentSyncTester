@@ -1,17 +1,22 @@
 {
   "name": "grading-services-reference-impl",
   "version": "1.0.0",
-  "description": "",
+  "description": "LMS-mocking reference implementation of a OneRoster Assignment Services Consumer",
+  "repositoroy": "https://github.com/cepster/OneRosterAssignmentSyncTester",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js"
   },
   "author": "Matt <matt.richards@infinitecampus.com>",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "moment": "^2.19.1",
     "oauth-1.0a": "^2.2.2",
     "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
   }
 }

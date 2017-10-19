@@ -8,7 +8,8 @@
             dueDate: $('#assignmentDueDate').val(),
             resultValueMin: $('#assignmentResultValueMin').val(),
             resultValueMax: $('#assignmentResultValueMax').val(),
-            classSourcedId: $('#assignmentClassSourcedId').val()
+            classSourcedId: $('#assignmentClassSourcedId').val(),
+            gradingPeriodSourcedId: $('#assignmentGradingPeriodSourcedId').val()
         };
     };
 
@@ -82,6 +83,7 @@
             $("#assignmentResultValueMin").val(storedAssignment.resultValueMin);
             $('#assignmentResultValueMax').val(storedAssignment.resultValueMax);
             $('#assignmentClassSourcedId').val(storedAssignment.classSourcedId);
+            $("#assignmentGradingPeriodSourcedId").val(storedAssignment.gradingPeriodSourcedId);
         }
         $('.assignment').change(function() {
             let assignment = generateAssignment();

@@ -1,17 +1,21 @@
 const OAuth = require('oauth-1.0a');
 const crypto = require('crypto');
+const moment = require('moment');
 
 module.exports = {
     createLineItemFromAssignment: (assignment) => {
         return {
             lineItem: {
                 title: assignment.name,
-                assignDate: assignment.assignDate + 'T00:00:00.000Z',
-                dueDate: assignment.dueDate + 'T00:00:00.000Z',
+                assignDate: moment(assignment.assignDate).toISOString(),
+                dueDate: moment(assignment.dueDate).toISOString(),
                 resultValueMin: assignment.resultValueMin,
                 resultValueMax: assignment.resultValueMax,
                 class: {
                     sourcedId: assignment.classSourcedId
+                },
+                gradingPeriod: {
+                    sourcedId: assignment.gradingPeriodSourcedId
                 }
             }
         };
@@ -21,7 +25,7 @@ module.exports = {
             result: {
                 score: score.score,
                 scoreStatus: "submitted",
-                scoreDate: score.date + 'T00:00:00.000Z',
+                scoreDate: moment(score.date).toISOString(),
                 lineItem: {
                     sourcedId: score.lineItemSourcedId
                 },
