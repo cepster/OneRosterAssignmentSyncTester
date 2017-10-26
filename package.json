@@ -5,7 +5,8 @@
   "repositoroy": "https://github.com/cepster/OneRosterAssignmentSyncTester",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "start:prod": "node app.js"
   },
   "author": "Matt <matt.richards@infinitecampus.com>",
   "license": "UNLICENSED",

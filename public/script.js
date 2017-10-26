@@ -23,6 +23,18 @@
         }
     };
 
+    var generateFinalGrade = function() {
+        return {
+            sourcedId: $('#finalGradeSourcedId').val(),
+            score: $('#finalGradeScore').val(),
+            percent: $('#finalGradePercent').val(),
+            date: $('#finalGradeDate').val(),
+            lineItemSourcedId: $('#finalGradeLineItemSourcedId').val(),
+            studentSourcedId: $('#finalGradeStudentSourcedId').val(),
+            comment: $('#finalGradeComment').val()
+        }
+    }
+
     $(document).ready(function() {
 
         var spinnerOpts = {
@@ -46,6 +58,7 @@
             $("#createAssignmentBtn").prop('disabled', true);
             $("#createScoreBtn").prop('disabled', true);
             $('#testConnectionBtn').prop('disabled', true);
+            $('#createFinalGradeBtn').prop('disabled', true);
         }
 
         function stopSpinner() {
@@ -53,6 +66,7 @@
             $("#createAssignmentBtn").prop('disabled', false);
             $("#createScoreBtn").prop('disabled', false);
             $('#testConnectionBtn').prop('disabled', false);
+            $('#createFinalGradeBtn').prop('disabled', false);
         }
 
         //URL
@@ -104,6 +118,22 @@
             localStorage.setItem('score', JSON.stringify(score));
         });
 
+        //FINAL GRADE
+        var storedFinalGrade = JSON.parse(localStorage.getItem('finalGrade'));
+        if(storedFinalGrade) {
+            $('#finalGradeSourcedId').val(storedFinalGrade.sourcedId);
+            $('#finalGradePercent').val(storedFinalGrade.percent);
+            $("#finalGradeScore").val(storedFinalGrade.score);
+            $('#finalGradeDate').val(storedFinalGrade.date);
+            $('#finalGradeComment').val(storedFinalGrade.comment);
+            $('#finalGradeLineItemSourcedId').val(storedFinalGrade.lineItemSourcedId);
+            $('#finalGradeStudentSourcedId').val(storedFinalGrade.studentSourcedId);
+        }
+        $('.finalGrade').change(function() {
+            let finalGrade = generateFinalGrade();
+            localStorage.setItem('finalGrade', JSON.stringify(finalGrade));
+        });
+
         //Date Pickers
         var DATEPICKER_OPTIONS = {
             format: 'yyyy-mm-dd',
@@ -112,6 +142,7 @@
         $('#assignmentAssignDate').datepicker(DATEPICKER_OPTIONS);
         $("#assignmentDueDate").datepicker(DATEPICKER_OPTIONS);
         $("#resultDate").datepicker(DATEPICKER_OPTIONS);
+        $('#finalGradeDate').datepicker(DATEPICKER_OPTIONS);
 
         function doneFunction(response) {
             console.log(JSON.stringify(response, null, 4));
@@ -155,6 +186,21 @@
                     key: $("#key").val(),
                     secret: $('#secret').val(),
                     score: generateScore()
+                }),
+                contentType: 'application/json',
+                type: 'POST'
+            }).done(doneFunction);
+        });
+
+        $("#createFinalGradeBtn").click(function() {
+            startSpinner();
+
+            $.ajax('createFinalGrade', {
+                data: JSON.stringify({
+                    url: $('#url').val(),
+                    key: $("#key").val(),
+                    secret: $('#secret').val(),
+                    grade: generateFinalGrade()
                 }),
                 contentType: 'application/json',
                 type: 'POST'

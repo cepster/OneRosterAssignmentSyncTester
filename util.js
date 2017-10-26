@@ -35,6 +35,24 @@ module.exports = {
             }
         }
     },
+    createResultFromFinalGrade: (grade) => {
+        return {
+            result: {
+                score: grade.percent,
+                metadata: {
+                    ext_infiniteCampus_scoreGrade: grade.score
+                },
+                scoreDate: moment(grade.date).toISOString(),
+                lineItem: {
+                    sourcedId: grade.lineItemSourcedId
+                },
+                student: {
+                    sourcedId: grade.studentSourcedId
+                },
+                comment: grade.comment
+            }
+        }
+    },
     getOAuth: (key, secret) => {
         return OAuth({
             consumer: {

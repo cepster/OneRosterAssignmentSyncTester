@@ -65,6 +65,36 @@ app.post('/createScore', (req, res) => {
     })
 });
 
+app.post('/createFinalGrade', (req, res) => {
+    const grade = util.createResultFromFinalGrade(req.body.grade);
+
+    let request_data = {
+        url: req.body.url + '/results/' + req.body.grade.sourcedId,
+        method: 'PUT',
+        json: grade
+    };
+
+    let oauth = util.getOAuth(req.body.key, req.body.secret);
+    let headers = oauth.toHeader(oauth.authorize(request_data));
+    headers['X-Vendor-Authorization'] = 'catTestVendorKey:catTestVendorSecret';
+
+    console.log(headers);
+
+    request({
+        url: request_data.url,
+        method: request_data.method,
+        json: grade,
+        headers: headers
+    }, (error, response, body) => {
+        let resPayload = {
+            requestPayload: grade,
+            response: response,
+            error: error
+        };
+        res.send(resPayload);
+    });
+});
+
 app.get('/getOrgs', (req, res) => {
     let request_data = {
         url: req.query.url + '/orgs',
