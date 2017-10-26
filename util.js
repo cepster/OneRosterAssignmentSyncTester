@@ -73,5 +73,9 @@ module.exports = {
                 return crypto.createHmac('sha1', key).update(base_string).digest('base64');
             }
         });
+    },
+    addVendorAuthHeader: (headers, vendorKey, vendorSecret) => {
+        headers['X-Vendor-Authorization'] = vendorKey + ':' + vendorSecret;
+        return headers;
     }
 }
