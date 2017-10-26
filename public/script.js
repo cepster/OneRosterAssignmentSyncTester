@@ -163,6 +163,8 @@
                     url: $('#url').val(),
                     key: $("#key").val(),
                     secret: $('#secret').val(),
+                    vendorKey: $("#vendorKey").val(),
+                    vendorSecret: $('#vendorSecret').val(),
                     assignment: generateAssignment()
                 }),
                 contentType: 'application/json',
@@ -182,6 +184,8 @@
                     url: $('#url').val(),
                     key: $("#key").val(),
                     secret: $('#secret').val(),
+                    vendorKey: $("#vendorKey").val(),
+                    vendorSecret: $('#vendorSecret').val(),
                     score: generateScore()
                 }),
                 contentType: 'application/json',
@@ -197,6 +201,8 @@
                     url: $('#url').val(),
                     key: $("#key").val(),
                     secret: $('#secret').val(),
+                    vendorKey: $("#vendorKey").val(),
+                    vendorSecret: $('#vendorSecret').val(),
                     grade: generateFinalGrade()
                 }),
                 contentType: 'application/json',
@@ -211,6 +217,8 @@
             url += 'url='+ $('#url').val();
             url += '&key=' + $('#key').val();
             url += '&secret=' + $("#secret").val();
+            url += '&vendorKey=' + $('#vendorKey').val();
+            url += '&vendorSecret=' + $('#vendorSecret').val();
 
             $.ajax(url, {
                 type: 'GET'

@@ -22,7 +22,9 @@ app.post('/createAssignment', (req, res) => {
 
     let oauth = util.getOAuth(req.body.key, req.body.secret);
     let headers = oauth.toHeader(oauth.authorize(request_data));
-    headers = util.addVendorAuthHeader(headers, req.body.vendorKey, req.body.vendorSecret);
+    if(req.body.vendorKey && req.body.vendorSecret) {
+        headers = util.addVendorAuthHeader(headers, req.body.vendorKey, req.body.vendorSecret);
+    }
 
     request({
         url: request_data.url,
@@ -50,7 +52,9 @@ app.post('/createScore', (req, res) => {
 
     let oauth = util.getOAuth(req.body.key, req.body.secret);
     let headers = oauth.toHeader(oauth.authorize(request_data));
-    headers = util.addVendorAuthHeader(headers, req.body.vendorKey, req.body.vendorSecret);
+    if(req.body.vendorKey && req.body.vendorSecret) {
+        headers = util.addVendorAuthHeader(headers, req.body.vendorKey, req.body.vendorSecret);
+    }
 
     request({
         url: request_data.url,
@@ -78,9 +82,9 @@ app.post('/createFinalGrade', (req, res) => {
 
     let oauth = util.getOAuth(req.body.key, req.body.secret);
     let headers = oauth.toHeader(oauth.authorize(request_data));
-    headers = util.addVendorAuthHeader(headers, req.body.vendorKey, req.body.vendorSecret);
-
-    console.log(headers);
+    if(req.body.vendorKey && req.body.vendorSecret) {
+        headers = util.addVendorAuthHeader(headers, req.body.vendorKey, req.body.vendorSecret);
+    }
 
     request({
         url: request_data.url,
@@ -105,7 +109,9 @@ app.get('/getOrgs', (req, res) => {
 
     let oauth = util.getOAuth(req.query.key, req.query.secret);
     let headers = oauth.toHeader(oauth.authorize(request_data));
-    headers = util.addVendorAuthHeader(headers, req.body.vendorKey, req.body.vendorSecret);
+    if(req.query.vendorKey && req.query.vendorSecret) {
+        headers = util.addVendorAuthHeader(headers, req.body.vendorKey, req.body.vendorSecret);
+    }
 
     request({
         url: request_data.url,
