@@ -1,6 +1,6 @@
 (function(){
 
-    var generateAssignment = function() {
+    let generateAssignment = function() {
         return {
             sourcedId: $('#assignmentSourcedId').val(),
             name: $('#assignmentName').val(),
@@ -13,7 +13,7 @@
         };
     };
 
-    var generateScore = function() {
+    let generateScore = function() {
         return {
             sourcedId: $('#resultSourcedId').val(),
             score: $('#resultScore').val(),
@@ -23,7 +23,7 @@
         }
     };
 
-    var generateFinalGrade = function() {
+    let generateFinalGrade = function() {
         return {
             sourcedId: $('#finalGradeSourcedId').val(),
             score: $('#finalGradeScore').val(),
@@ -33,7 +33,15 @@
             studentSourcedId: $('#finalGradeStudentSourcedId').val(),
             comment: $('#finalGradeComment').val()
         }
-    }
+    };
+
+    let locallyStoredItems = [
+        'url',
+        'key',
+        'secret',
+        'vendorKey',
+        'vendorSecret'
+    ];
 
     $(document).ready(function() {
 
@@ -69,22 +77,11 @@
             $('#createFinalGradeBtn').prop('disabled', false);
         }
 
-        //URL
-        $('#url').val(localStorage.getItem('url'));
-        $('#url').change(function() {
-            localStorage.setItem('url', $(this).val());
-        });
-
-        //KEY
-        $("#key").val(localStorage.getItem('key'));
-        $("#key").change(function(){
-            localStorage.setItem('key', $(this).val());
-        });
-
-        //SECRET
-        $('#secret').val(localStorage.getItem('secret'));
-        $("#secret").change(function(){
-            localStorage.setItem('secret', $(this).val());
+        locallyStoredItems.forEach(function(element){
+            $('#' + element).val(localStorage.getItem(element));
+            $('#' + element).change(function() {
+                localStorage.setItem(element, $(this).val());
+            });
         });
 
         //ASSIGNMENT
