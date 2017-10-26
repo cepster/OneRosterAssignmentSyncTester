@@ -36,12 +36,8 @@ module.exports = {
         }
     },
     createResultFromFinalGrade: (grade) => {
-        return {
+        let result = {
             result: {
-                score: grade.percent,
-                metadata: {
-                    ext_infiniteCampus_scoreGrade: grade.score
-                },
                 scoreDate: moment(grade.date).toISOString(),
                 lineItem: {
                     sourcedId: grade.lineItemSourcedId
@@ -51,7 +47,20 @@ module.exports = {
                 },
                 comment: grade.comment
             }
+        };
+
+        if(grade.percent) {
+            result.result.score = grade.percent;
         }
+
+        if(grade.score) {
+            result.result.metadata = {
+                ext_infiniteCampus_scoreGrade: grade.score
+            };
+        }
+
+        console.log(result);
+        return result;
     },
     getOAuth: (key, secret) => {
         return OAuth({
