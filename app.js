@@ -110,7 +110,7 @@ app.get('/getOrgs', (req, res) => {
     let oauth = util.getOAuth(req.query.key, req.query.secret);
     let headers = oauth.toHeader(oauth.authorize(request_data));
     if(req.query.vendorKey && req.query.vendorSecret) {
-        headers = util.addVendorAuthHeader(headers, req.body.vendorKey, req.body.vendorSecret);
+        headers = util.addVendorAuthHeader(headers, req.query.vendorKey, req.query.vendorSecret);
     }
 
     request({
